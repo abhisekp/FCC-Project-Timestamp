@@ -1,0 +1,86 @@
+{
+  "name": "timestamp-microservice-absk",
+  "version": "1.0.0",
+  "description": "Get unix and natural timestamps",
+  "main": "build/server.js",
+  "scripts": {
+    "start": "run-s build start:prod",
+    "start:prod": "cross-env NODE_ENV=production node build/server.js",
+    "prebuild": "rimraf build",
+    "build": "cross-env NODE_ENV=production babel -d build -D src"
+  },
+  "dependencies": {
+    "express": "^4.16.3",
+    "app-root-path": "^2.0.1",
+    "moment": "^2.22.0",
+    "lodash": "^4.17.5",
+    "response-time": "^2.3.2",
+    "helmet": "^3.12.0",
+    "cross-env": "^5.1.4",
+    "npm-run-all": "^4.1.2",
+    "rimraf": "^2.6.2",
+    "express-rate-limit": "^2.11.0",
+    "ms": "^2.1.1",
+    "rate-limit-redis": "^1.4.0",
+    "redis": "^2.8.0",
+    "totoro-node": "^1.0.24",
+    "source-map-support": "^0.5.4",
+    "@stamp/it": "^1.0.1",
+    "@stamp/privatize": "^1.0.1",
+    "@stamp/named": "^1.0.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-preset-latest": "^6.16.0",
+    "babel-preset-stage-0": "^6.16.0",
+    "babel-plugin-lodash": "^3.2.11",
+    "babel-preset-babili": "^1.0.0",
+    "babel-plugin-source-map-support": "^2.0.1",
+    "babel-plugin-add-module-exports": "^0.2.1"
+  },
+  "engines": {
+    "node": "6.9.1"
+  },
+  "repository": {
+    "url": "https://gomix.com/#!/project/timestamp-microservice-absk"
+  },
+  "keywords": [
+    "microservice",
+    "unix",
+    "freecodecamp",
+    "fcc",
+    "date",
+    "timestamp",
+    "api",
+    "abhisekp",
+    "time",
+    "human",
+    "natural",
+    "moment"
+  ],
+  "license": "MIT",
+  "babel": {
+    "sourceMap": "inline",
+    "plugins": [
+      "source-map-support",
+      "add-module-exports",
+      "lodash"
+    ],
+    "presets": [
+      [
+        "latest",
+        {
+          "loose": true
+        }
+      ],
+      "stage-0"
+    ]
+  },
+  "env": {
+    "production": {
+      "presets": [
+        "babili"
+      ]
+    }
+  }
+}
