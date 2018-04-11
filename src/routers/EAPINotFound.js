@@ -1,4 +1,4 @@
-const defaultResponse = (req, res) => {
+const EAPINotFound = () => (req, res) => {
   const docUrl = `${req.protocol}://${req.hostname}`;
   res.status(404).format({
     json: () => {
@@ -11,6 +11,6 @@ const defaultResponse = (req, res) => {
       res.redirect(docUrl);
     },
   });
-};
+}
 
-export default defaultResponse;
+export default EAPINotFound
