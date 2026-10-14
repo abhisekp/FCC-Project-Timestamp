@@ -1,14 +1,6 @@
-import express from 'express';
-import APITimestampRouter from './timestamp';
-import EAPINotFound from './EAPINotFound';
-
-const API_VERSION = process.env.API_VERSION;
-
-const APIRouter = express.Router();
-APIRouter.APIRouter = APIRouter;
-
-APIRouter.use('/t(ime)?s(tamp|tring)?', APITimestampRouter);
-APIRouter.use('/v1/t(ime)?s(tamp|tring)?', APITimestampRouter);
-// APIRouter.all('/', EAPINotFound());
-
-export default APIRouter;
+const express = require('express');
+const timestampRouter = require('./timestamp');
+const router = express.Router();
+router.use('/t(ime)?s(tamp|tring)?', timestampRouter);
+router.use('/v1/t(ime)?s(tamp|tring)?', timestampRouter);
+module.exports = router;

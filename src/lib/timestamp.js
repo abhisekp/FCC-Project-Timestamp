@@ -1,1 +1,1 @@
-export { default as default } from './timestamp-v1_0_0';
+module.exports = require('./timestamp-v1_0_0');

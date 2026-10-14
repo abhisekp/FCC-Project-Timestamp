@@ -1,0 +1,4 @@
+body { margin: 0; font: 18px/1.6 system-ui, sans-serif; color: #17212f; background: #f7f9fc; }
+main { max-width: 760px; margin: 4rem auto; padding: 0 1.5rem; }
+a { color: #164dc9; overflow-wrap: anywhere; }
+pre { padding: 1rem; background: #e8edf5; white-space: pre-wrap; }

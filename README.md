@@ -1,88 +1,37 @@
-# FreeCodeCamp API Backend Project: Timestamp microservice [**`timestamp-microservice-absk`**](https://timestamp-microservice-absk.glitch.me)
-Get unix and natural timestamp.
+# Timestamp microservice
 
-**Challenge:** <https://www.freecodecamp.com/challenges/timestamp-microservice>
+Converts Unix timestamps in **seconds** and natural dates to UTC. The existing v1 response contract and aliases are preserved:
 
-## User stories:  
+- `GET /api/ts/1451606400` or `GET /api/timestamp/January%201,%202016`
+- Aliases include `/api/timestring` and `/api/v1/ts`.
+- No timestamp returns the current time.
+- Invalid dates return `{ "unix": null, "natural": null }`.
 
-1. I can pass a string as a parameter, and it will check to see whether that string contains either a unix timestamp or a natural language date (example: January 1, 2016). — **DONE**  
-   [https://timestamp-microservice-absk.glitch.me/api/ts/January 1, 2016](https://timestamp-microservice-absk.glitch.me/api/ts/January%201,%202016)  
-   ```json
-    {
-      "unix": 1451606400,
-      "natural": "January 01, 2016"
-    }
-   ```
-2. If it does, it returns both the Unix timestamp and the natural language form of that date. — **DONE**  
-   <https://timestamp-microservice-absk.glitch.me/api/ts/1451606400>  
-   ```json
-    {
-      "unix": 1451606400,
-      "natural": "January 01, 2016"
-    }
-   ```
-3. If it does not contain a date or Unix timestamp, it returns null for those properties. — **DONE**  
-   <https://timestamp-microservice-absk.glitch.me/api/ts/random>  
-   ```json
-    {
-      "unix": null,
-      "natural": null
-    }
-   ```
+Example response:
 
-### Additional Features:
-
-1. If url is `/api/ts` without any timestamp, then respond with the current time. — **DONE**  
-   <https://timestamp-microservice-absk.glitch.me/api/ts>  
-   ```json
-    {
-      "unix": 1523406140,
-      "natural": "April 11, 2018"
-    }
-   ```
-
-
-## Usage
-
-```text
-API_HOST: timestamp-microservice-absk.glitch.me
-API_VERSION: v1
-API_ROOT: /api
-```
-**OUTPUT**   
-
-```text
-{
-  "unix": <time in seconds> e.g. 1492905600 or null
-  "natural": "Month Day, Year" e.g. "April 23, 2017" or null
-}
+```json
+{ "unix": 1451606400, "natural": "January 01, 2016" }
 ```
 
-#### Example
+## Local development and checks
 
-<https://timestamp-microservice-absk.glitch.me/api>
+Use Node 24 (`.nvmrc`), then `npm ci`, `npm test`, `npm run build`, and `npm start`.
+Open http://localhost:3000. Set `PORT` to change the port.
+`GET /health` returns `{ "status": "ok" }`.
 
-----
-### Timestamp API
+The service runs directly from CommonJS source. Babel and a mandatory Redis connection are no longer required.
+API requests are limited to 100 per IP per 15 minutes in each process. The in-memory limiter is a local abuse guard; distributed deployments should use provider firewall rules for fleet-wide limits. No credentials are required.
 
-```http
-GET /timestamp
-GET /ts
-```
+## Deployment
 
-`https://timestamp-microservice-absk.glitch.me/api/timestamp/:timestring`  
-`https://timestamp-microservice-absk.glitch.me/api/ts/:timestring`
+The former Glitch URL returns HTTP 410 and cannot host this app.
+This repository is prepared for Vercel's Express framework with Node 24, which serves `public/` assets and detects the exported Express app in `src/server.js`.
+See [Vercel's Express guide](https://vercel.com/docs/frameworks/backend/express).
 
-- **`:timestring`** - Unix timestamp or natural time  
-  e.g. `Jan 1, 2050`, `28th February 1995`, `1448928000`, etc.
+After production approval, import `abhisekp/FCC-Project-Timestamp` in the intended Vercel team, select `glitch` as the production branch, and use the repository root with the Express preset.
+Deploy a preview first. Verify the home page, CSS, `/health`, valid dates, invalid dates, and current-time routes before production activation.
+Update the repository homepage to the verified production URL after deployment.
+The old Glitch host is not transferable through this repository.
 
-#### Example
-<https://timestamp-microservice-absk.glitch.me/api/ts/1448928000>
-
-##### TODO
-
-1. Support for relative time `/ts/{now,latest,today,yesterday,a year ago, etc}`.
-2. Frontend of the API timeserver for easy getting the time.
-3. Have a great design of the frontend.
-4. If url is `/api`, then repond with a JSON document with an `error` and a `documention_url` field directing to the relevant documentation of the timeserver.
-5. Add authentication and limit based on the authenticated user priviledges
+GitHub Actions runs the HTTP regression tests and entry-point syntax check on Node 24.
+No production deployment has been performed by adding this configuration.

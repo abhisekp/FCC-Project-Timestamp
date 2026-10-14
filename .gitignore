@@ -63,3 +63,8 @@ jspm_packages
 !/src
 !/public
 !/views
+
+.env
+.env.*
+!.env.example
+.vercel/
