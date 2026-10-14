@@ -4,17 +4,25 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Timestamp microservice</title>
+  <meta name="description" content="Convert Unix seconds and natural dates with a simple, open timestamp API. All dates use UTC.">
+  <link rel="icon" href="data:,">
   <link rel="stylesheet" href="/style.css">
+  <script src="/config.js" defer></script>
+  <script src="/client.js" defer></script>
 </head>
 <body>
+  <header><a class="brand" href="/" aria-label="Timestamp home"><span aria-hidden="true">◷</span> Timestamp<span class="tag">MICROSERVICE</span></a><a href="https://github.com/abhisekp/FCC-Project-Timestamp">Source ↗</a></header>
   <main>
-    <h1>Timestamp microservice</h1>
-    <p>Convert a Unix timestamp in seconds or a natural date to a UTC date.</p>
-    <p>Example: <a href="/api/ts/1451606400">/api/ts/1451606400</a> or
-      <a href="/api/ts/January%201,%202016">/api/ts/January 1, 2016</a>.</p>
-    <pre>{ "unix": 1451606400, "natural": "January 01, 2016" }</pre>
-    <p>Use <a href="/api/ts">/api/ts</a> for the current time. Invalid dates return null for both fields.</p>
-    <p>Aliases: /api/timestamp, /api/timestring and /api/v1/ts.</p>
-  </main>
+    <section class="intro"><p class="eyebrow">A LITTLE CLARITY, ONE SECOND AT A TIME</p><h1>Make time<br><span>human readable.</span></h1><p class="lead">From Unix seconds to a date you understand.<br>One simple converter. Always in UTC.</p></section>
+    <section class="converter" aria-labelledby="convert-title">
+      <div class="section-top"><h2 id="convert-title">Timestamp microservice</h2><span class="utc">UTC +00:00</span></div>
+      <form id="convert-form"><label for="time-input">Date or Unix timestamp</label><div class="input-row"><input id="time-input" name="timestamp" placeholder="e.g. January 1, 2016 or 1451606400" maxlength="200" autocomplete="off" aria-describedby="input-hint"><button id="convert-button" type="submit">Convert <span aria-hidden="true">↗</span></button></div><p id="input-hint" class="hint">Unix timestamps are in seconds. Leave blank for the current time.</p></form>
+      <div class="examples"><span>TRY IT</span><button type="button" data-value="1451606400">Unix seconds</button><button type="button" data-value="January 1, 2016">Natural date</button><button type="button" data-value="0">Epoch zero</button><button type="button" data-value="">Current time</button></div>
+      <p id="status" role="status" aria-live="polite">Ready when you are. Enter a date to begin.</p>
+      <div id="result" hidden><div class="result-grid"><div><p class="eyebrow">UNIX SECONDS</p><p id="unix-value" class="result-value"></p></div><div><p class="eyebrow">NATURAL DATE · UTC</p><p id="natural-value" class="result-value"></p></div></div><div class="response-header"><span>JSON RESPONSE</span><button id="copy-button" type="button">Copy JSON</button></div><pre id="json-output"></pre><a id="request-link" href="/api/ts">Open API response ↗</a></div>
+      <noscript><p>JavaScript is needed for the converter. You can still <a href="/api/ts/1451606400">open the API directly</a>.</p></noscript>
+    </section>
+    <section class="docs" aria-labelledby="api-title"><div><p class="eyebrow">SMALL API. STRAIGHT ANSWERS.</p><h2 id="api-title">Built to be useful.</h2><p>No account, API key, or setup needed. Send a date in the URL and receive Unix seconds and a natural date.</p><p>Invalid input returns <code>null</code> for both fields.</p></div><div class="endpoints"><a href="/api/ts/1451606400"><span>GET</span> /api/ts/1451606400 ↗</a><a href="/api/ts/January%201,%202016"><span>GET</span> /api/ts/January 1, 2016 ↗</a><a href="/api/ts"><span>GET</span> /api/ts ↗</a><p class="hint">Also available: /api/timestamp, /api/timestring and /api/v1/ts.</p></div></section>
+  </main><footer><span>A freeCodeCamp project by <a href="https://github.com/abhisekp">Abhisek Pattnaik</a></span><span>Seconds in. Clarity out.</span></footer>
 </body>
 </html>

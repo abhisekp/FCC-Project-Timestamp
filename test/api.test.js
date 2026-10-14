@@ -14,6 +14,7 @@ test('HTTP contract and deployment entry point', async (t) => {
       assert.equal(response.status, 200);
       assert.deepEqual(await response.json(), expected);
       assert.equal(response.headers.get('cache-control'), 'no-store');
+      assert.equal(response.headers.get('access-control-allow-origin'), '*');
     }
   }
   for (const value of ['random', 'February%2030,%202016', '9999999999999999999999']) {
@@ -30,6 +31,8 @@ test('HTTP contract and deployment entry point', async (t) => {
   assert.match(await home.text(), /Timestamp microservice/);
   assert.equal(home.headers.get('x-powered-by'), null);
   assert.equal((await fetch(`${base}/style.css`)).status, 200);
+  assert.equal((await fetch(`${base}/client.js`)).status, 200);
+  assert.equal((await fetch(`${base}/config.js`)).status, 200);
   assert.deepEqual(await (await fetch(`${base}/health`)).json(), { status: 'ok' });
 });
 

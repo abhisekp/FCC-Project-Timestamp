@@ -7,12 +7,16 @@ const apiRouter = require('./routers/api');
 function createApp({ rateLimitMax = 100 } = {}) {
   const app = express();
   app.disable('x-powered-by');
-  // Vercel supplies one trusted forwarding hop. Direct/local hosting trusts none.
-  if (process.env.VERCEL === '1') app.set('trust proxy', 1);
+  // Trust only the nearest hosting proxy; ignore client-prepended forwarding hops.
+  if (process.env.VERCEL === '1' || process.env.RENDER === 'true') app.set('trust proxy', 1);
   app.use(helmet());
   app.use(express.static(path.join(__dirname, '../public')));
   app.get('/health', (req, res) => res.json({ status: 'ok' }));
-  app.use('/api', rateLimit({
+  // This read-only public API has no credentials or private user data.
+  app.use('/api', (req, res, next) => {
+    res.set('Access-Control-Allow-Origin', '*');
+    next();
+  }, rateLimit({
     windowMs: 15 * 60 * 1000,
     limit: rateLimitMax,
     standardHeaders: 'draft-8',

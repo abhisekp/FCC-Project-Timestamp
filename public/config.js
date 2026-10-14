@@ -1,0 +1,1 @@
+window.TIMESTAMP_API_ORIGIN = '';

@@ -8,7 +8,8 @@
   "scripts": {
     "start": "node src/server.js",
     "start:prod": "node src/server.js",
-    "build": "node --check src/server.js",
+    "build": "node --check src/server.js && node --check public/client.js && node --check scripts/build-ui.js",
+    "build:ui": "node scripts/build-ui.js",
     "test": "node --test"
   },
   "engines": {

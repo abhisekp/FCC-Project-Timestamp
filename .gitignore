@@ -68,3 +68,5 @@ jspm_packages
 .env.*
 !.env.example
 .vercel/
+.npm-cache/
+dist/
