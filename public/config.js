@@ -1,1 +1,1 @@
-window.TIMESTAMP_API_ORIGIN = '';
+window.TIMESTAMP_API_ORIGIN = "";

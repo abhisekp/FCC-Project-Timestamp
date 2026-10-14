@@ -40,7 +40,7 @@ Glitch no longer provides app hosting. The deployment targets are **Render for t
 ### Vercel UI
 
 - Team: `eaglevision` (Abhisek Pattnaik's projects); project: `fcc-project-timestamp`.
-- Framework: Other; build: `node scripts/build-ui.js`; output: `dist`.
+- Framework: Other; build: `npm run build && npm test && npm run build:ui`; output: `dist`.
 - `vercel.json` supplies the static build, security headers and compatibility rewrites for `/api/*` and `/health`.
 - `scripts/build-ui.js` copies the UI and writes its public API origin to `dist/config.js`. Update the API address there and in `vercel.json` if the Render service moves.
 - Local development serves `public/config.js`, which uses the local API. The UI supports dates, Unix seconds, epoch zero, current time, invalid inputs, network errors and JSON copying.

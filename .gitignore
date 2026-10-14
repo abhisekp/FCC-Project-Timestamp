@@ -70,3 +70,5 @@ jspm_packages
 .vercel/
 .npm-cache/
 dist/
+.playwright-cli/
+output/playwright/
